@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Nombre Cliente</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders;">
+          <th scope="row">{{order.id}}</th>
+          <td>{{order.date.year+'-'+order.date.month+'-'+order.date.day}}</td>
+          <td>{{order.clientName}}</td>
+          <td>
+            <button type="button" class="btn btn-primary" routerLink="edit-order/{{order.id}}">Editar</button>
+            <button type="button" class="btn btn-danger" (click)="clickDelete(order.id, order)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="container-fluid">
+      <button type="button" class="btn btn-success float-start" (click)="clickAdd()">Agregar orden</button>
+      <button type="button" class="btn btn-danger float-end" (click)="clickLogOut()">Salir</button>
+    </div>
+  </div>
+</div>
+<app-confirm-dialog></app-confirm-dialog>
+<router-outlet></router-outlet>

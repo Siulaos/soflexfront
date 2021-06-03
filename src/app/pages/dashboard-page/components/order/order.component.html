@@ -1,0 +1,122 @@
+<div class="container pt-5">
+  <div class="row">
+    <div class="d-flex justify-content-center">
+      <h2>Order Form</h2>
+    </div>
+  </div>
+  <div class="row">
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha</label>
+            <input
+              class="form-control"
+              placeholder="yyyy-mm-dd"
+              name="dp"
+              formControlName="date"
+              ngbDatepicker
+              #d="ngbDatepicker"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-primary calendar"
+                (click)="d.toggle()"
+                type="button"
+              >
+                Date
+              </button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="nombreCliente" class="form-label">Nombre cliente</label>
+            <select
+              class="form-control"
+              (change)="changeDate($event)"
+              formControlName="clientName"
+            >
+              <option value="" disabled>Elija el cliente</option>
+              <option *ngFor="let cn of clientNames" [ngValue]="cn">
+                {{ cn }}
+              </option>
+            </select>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-warning float-start"
+            (click)="clickCancel()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary float-end"
+            (click)="guardarOrden()"
+          >
+            Save Order
+          </button>
+        </div>
+
+        <div class="col">
+          <!--Productos-->
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container formArrayName="products">
+                <tr *ngFor="let product of products.controls; index as i">
+                  <td scope="row" [formGroupName]="i">
+                    <input type="text" formControlName="name" />
+                  </td>
+                  <td [formGroupName]="i">
+                    <input type="text" formControlName="quantity" />
+                  </td>
+                  <td [formGroupName]="i">
+                    <input type="text" formControlName="price" />
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      (click)="saveData('save', product, i)"
+                    >
+                      Guardar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="saveData('edit', product, i)"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      (click)="saveData('delete', product, i)"
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+          <button
+            type="button"
+            class="btn btn-primary float-end"
+            (click)="addItem()"
+          >
+            Agregar Item
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

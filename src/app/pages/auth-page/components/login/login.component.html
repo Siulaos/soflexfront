@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-4"></div>
+  <div class="col-4">
+    <div class="container">
+      <div class="card">
+        <img
+          src="../../../../../assets/img/logo.jpg"
+          class="card-img-top"
+          alt="Responsive image"
+        />
+        <div class="card-body">
+          <form [formGroup]="loginForm!" (ngSubmit)="clickLogin()" novalidate>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                aria-describedby="username"
+                placeholder="Enter username"
+                name="username"
+                formControlName="username"
+              />
+              <div>{{ getControlError("username") }}</div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Password"
+                name="password"
+                formControlName="password"
+              />
+              <div>{{ getControlError("password") }}</div>
+            </div>
+              <div class="pt-3 form-group">
+                <button type="submit" class="btn btn-primary btn-md w-100" [disabled]="loginForm!.invalid">Login</button>
+              </div>
+              <!-- <div class="pt-3 form-group col-6">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="clickRegister()"
+                >
+                  Register
+                </button>
+              </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4"></div>
+</div>
